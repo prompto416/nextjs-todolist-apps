@@ -1,12 +1,12 @@
 {
-    "tasks":[
-        {
-            "id":"1",
-            "text":"create a nextjs project"
-        },
-        {
-            "id":"2",
-            "text":"integrate an api for the nextjs project"
-        }
-    ]
+  "tasks": [
+    {
+      "id": "f8f1f4b8-24d7-4687-9bc5-82d011606522",
+      "text": "ease"
+    },
+    {
+      "id": "3b1c744a-07f1-416a-8068-c125360e3374",
+      "text": "12312312"
+    }
+  ]
 }

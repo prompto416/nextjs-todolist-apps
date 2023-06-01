@@ -2,6 +2,7 @@ import { getAllTodos } from "../../api";
 import AddTask from "./components/AddTask";
 import Todolist from './components/Todolist';
 
+
 export default async function Home() {
   const  tasks = await getAllTodos();
   console.log(tasks,"mytask");
@@ -11,7 +12,7 @@ export default async function Home() {
           <h1 className='text-2xl font-bold'>To Do List</h1>
           <AddTask/>
       </div>
-      <Todolist/>
+      <Todolist tasks={tasks}/>
     </main>
   )
 }
