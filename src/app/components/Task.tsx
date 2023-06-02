@@ -10,8 +10,6 @@ interface ITaskProps {
     task: ITask
 }
 
-
-
 const Task: React.FC<ITaskProps> = ({task}) => {
     const router = useRouter();
     const [isDone, setIsDone] = useState<boolean>(false);
@@ -20,8 +18,6 @@ const Task: React.FC<ITaskProps> = ({task}) => {
     const [taskToEdit, setTaskToEdit] = useState<string>(task.text)
     const [taskClassName, setTaskClassName] = useState('w-full');
   
-
-
     const handleSubmitEditTodo : FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await editTodo({
@@ -52,7 +48,7 @@ const Task: React.FC<ITaskProps> = ({task}) => {
           setTaskClassName('w-full text-crossed-out');
           setTimeout(() => {
             handleDeleteTask(task.id);
-          }, 1000);
+          }, 750);
         }
       };
 
