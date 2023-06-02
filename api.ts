@@ -12,9 +12,6 @@ export const getAllTodos = async (): Promise<ITask[]> => {
     return data;
 }
 
-export const useGetAllTodos = () => {
-    return useQuery<ITask[], Error>('todos', getAllTodos);
-  };
 
 export const addTodo = async(todo: ITask): Promise<ITask> => {
     const { data } = await axios.post(`${baseUrl}/tasks`, todo);
@@ -31,46 +28,19 @@ export const deleteTodo = async(id:string): Promise<void> => {
 }
 
 
-// export const getAllTodos = async (): Promise<ITask[]> => { 
-//     const res = await fetch(`${baseUrl}/tasks`, {cache: 'no-store'});
-//     const todos = await res.json();
-//     return todos;
-// }
+//react query hooks 
 
-// export const addTodo = async(todo: ITask): Promise<ITask> => {
-//     const res = await fetch(`${baseUrl}/tasks`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-type': 'application/json'
-//         },
-//         body: JSON.stringify(todo)
-//     });
-//     const newTodo = await res.json();
-//     return newTodo;
-
-// }
+export const useGetAllTodos = () => {
+    return useQuery<ITask[], Error>('todos', getAllTodos);
+  };
 
 
-// export const editTodo = async(todo: ITask): Promise<ITask> => {
-//     const res = await fetch(`${baseUrl}/tasks/${todo.id}`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-type': 'application/json'
-//         },
-//         body: JSON.stringify(todo)
-//     });
-//     const updatedTodo = await res.json();
-//     return updatedTodo;
 
-// }
-
-
-// export const deleteTodo = async(id:string): Promise<void> => {
-//     await fetch(`${baseUrl}/tasks/${id}`, {
-//         method: 'DELETE',
-       
-        
-//     });
-    
-
-// }
+export const useDeleteTodo = () => {
+    const queryClient = useQueryClient();
+    return useMutation(deleteTodo, {
+      onSuccess: () => {
+        queryClient.invalidateQueries('todos');
+      },
+    });
+};

@@ -4,13 +4,15 @@ import { ITask } from "../../../types/tasks"
 import {FiEdit, FiTrash2} from 'react-icons/fi'
 import Modal from './Modal'
 import {useRouter} from "next/navigation";
-import { deleteTodo, editTodo } from "../../../api";
+import { deleteTodo, editTodo, useDeleteTodo } from "../../../api";
+
 
 interface ITaskProps {
     task: ITask
 }
 
 const Task: React.FC<ITaskProps> = ({task}) => {
+  const deleteTodoMutation = useDeleteTodo();
     const router = useRouter();
     const [isDone, setIsDone] = useState<boolean>(false);
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
@@ -31,10 +33,12 @@ const Task: React.FC<ITaskProps> = ({task}) => {
       }
 
     const handleDeleteTask = async (id:string) => {
-        
-        await deleteTodo(id);
+        //comments are backup 
+        // await deleteTodo(id);
+        deleteTodoMutation.mutate(id);
         setOpenModalDelete(false);
-        router.refresh()
+        
+        // router.refresh()
     }
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
